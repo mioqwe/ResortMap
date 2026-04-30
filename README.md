@@ -4,6 +4,47 @@
 
 ---
 
+## Getting Started
+
+### Prerequisites
+- Node.js 18+
+
+### Installation
+```bash
+npm install
+```
+
+### Start the App
+```bash
+npm start -- --map map.ascii --bookings bookings.json
+```
+
+Or using node directly:
+```bash
+node start.js --map map.ascii --bookings bookings.json
+```
+
+The app will be available at http://localhost:5173
+
+### Run Tests
+```bash
+npm test           # Unit tests
+npm run test:e2e   # E2E tests (requires dev server running)
+npm run test:all   # All tests
+```
+
+---
+
+## Design Decisions
+
+- **Single-process architecture:** SvelteKit handles both frontend and API in one process, eliminating CORS issues and simplifying deployment.
+- **In-memory state:** Cabana bookings are stored in memory (Map structure) for simplicity. Bookings are lost on restart but survive page refreshes.
+- **RESTful API:** All data flows through `/api/map`, `/api/bookings`, and `/api/book` endpoints.
+- **Minimal validation:** Only room number + guest name matching against bookings.json is required for booking.
+- **Asset mapping:** All tile types (W, p, #, c, .) map to specific PNG assets in `/assets/`.
+
+---
+
 ## Task
 
 Build a webapp that displays the resort map and allows guests to book cabanas. The frontend should rely entirely on a RESTful API for all data.
